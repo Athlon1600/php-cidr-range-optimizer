@@ -1,5 +1,8 @@
 ## Optimize CIDR Ranges
 
+[![Minimum PHP Version](https://img.shields.io/badge/php-%20%3E%3D7.4-blue.svg)](https://php.net/)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/Athlon1600/php-cidr-range-optimizer/ci.yml)
+
 Given a list of IP address ranges, minify that list to the smallest possible size by performing the following
 optimizations:
 
