@@ -54,6 +54,11 @@ class CIDR
         }
 
         $start = ip2long($address);
+
+        if ($start === false) {
+            throw new \InvalidArgumentException('Invalid IP address: ' . $address);
+        }
+
         $prefixLength = pow(2, (32 - $prefix)) - 1;
         $end = $start + $prefixLength;
 
@@ -66,7 +71,7 @@ class CIDR
 
     public function getFirstAddress(): string
     {
-        return long2ip($this->start);
+        return long2ip($this->start) ?: "";
     }
 
     public function getFirstAddressLong(): int
@@ -76,7 +81,7 @@ class CIDR
 
     public function getLastAddress(): string
     {
-        return long2ip($this->end);
+        return long2ip($this->end) ?: "";
     }
 
     public function getLastAddressLong(): int

@@ -25,7 +25,7 @@ jobs:
         run: composer install --no-interaction --prefer-dist --no-progress
 
       - name: Static analysis
-        run: vendor/bin/phpstan analyse src --level=6
+        run: vendor/bin/phpstan analyse src --level=max
 
       - name: Run test suite
         run: vendor/bin/phpunit tests/

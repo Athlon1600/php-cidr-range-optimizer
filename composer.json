@@ -33,6 +33,6 @@
   },
   "scripts": {
     "test": "./vendor/bin/phpunit tests",
-    "static": "./vendor/bin/phpstan analyse src --level 6 --no-progress"
+    "static": "./vendor/bin/phpstan analyse src --level max --no-progress"
   }
 }
