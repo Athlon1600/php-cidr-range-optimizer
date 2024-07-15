@@ -105,13 +105,9 @@ class CIDR
         return ($this->getFirstAddressLong() <= $other->getFirstAddressLong() && $this->getLastAddressLong() >= $other->getLastAddressLong());
     }
 
-    public function equals($other): bool
+    public function equals(CIDR $other): bool
     {
-        if ($other instanceof CIDR) {
-            return $this->getFirstAddressLong() === $other->getFirstAddressLong() && $this->getLastAddressLong() === $other->getLastAddressLong();
-        }
-
-        return false;
+        return $this->getFirstAddressLong() === $other->getFirstAddressLong() && $this->getLastAddressLong() === $other->getLastAddressLong();
     }
 
     public function __toString(): string

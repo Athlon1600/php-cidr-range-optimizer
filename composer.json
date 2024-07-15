@@ -4,14 +4,19 @@
   "type": "library",
   "license": "MIT",
   "keywords": [
+    "cidr",
+    "ip ranges",
     "cidr optimizer",
     "subnet optimizer",
     "network range optimizer",
     "cidr merge"
   ],
-  "scripts": {
-    "test": "./vendor/bin/phpunit tests",
-    "static": "./vendor/bin/phpstan analyse src --level 6 --no-progress"
+  "require": {
+    "php": ">=7.4.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": ">=6.0",
+    "phpstan/phpstan": "^1.11"
   },
   "autoload": {
     "psr-4": {
@@ -26,8 +31,8 @@
       "ProxyNova\\RangeOptimizer\\Tests\\": "tests/"
     }
   },
-  "require-dev": {
-    "phpunit/phpunit": "10",
-    "phpstan/phpstan": "^1.11"
+  "scripts": {
+    "test": "./vendor/bin/phpunit tests",
+    "static": "./vendor/bin/phpstan analyse src --level 6 --no-progress"
   }
 }

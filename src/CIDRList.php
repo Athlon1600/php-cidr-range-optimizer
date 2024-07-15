@@ -28,7 +28,7 @@ class CIDRList implements \IteratorAggregate, \Countable
     /**
      * does validation too
      *
-     * @param string[] $ranges
+     * @param string[]|CIDR[] $ranges
      * @return self
      */
     public static function fromArray(array $ranges): self
