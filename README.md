@@ -21,7 +21,7 @@ composer require athlon1600/php-cidr-range-optimizer
 Build your list of IP ranges into `CIDRList` object, then use `RangeOptimizer` class to optimize it. Example:
 
 ```php
-use ProxyNova\RangeOptimizer\CIDR;
+use ProxyNova\RangeOptimizer\CIDRList;
 use ProxyNova\RangeOptimizer\RangeOptimizer;
 
 $ranges = CIDRList::fromArray([
