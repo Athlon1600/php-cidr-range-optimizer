@@ -34,8 +34,7 @@ class CIDR
         $onlyIp = filter_var(trim($cidrNotation), FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
 
         if ($onlyIp) {
-            $this->prefix = $onlyIp;
-            $this->length = 32;
+            $this->parseOrFail($onlyIp . '/32');
             return;
         }
 

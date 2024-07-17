@@ -6,7 +6,8 @@
 Given a list of IP address ranges, minify that list to the smallest possible size by performing the following
 optimizations:
 
-- removing duplicate IP ranges from the list
+- removing invalid IP addresses/ranges from the list
+- removing duplicates
 - removing IP ranges already covered by larger ranges in the list
 - merging adjacent IP ranges into larger, contiguous blocks
 
