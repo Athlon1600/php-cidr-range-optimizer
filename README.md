@@ -11,6 +11,12 @@ optimizations:
 - removing IP ranges already covered by larger ranges in the list
 - merging adjacent IP ranges into larger, contiguous blocks
 
+## :star: Demo
+
+An online tool that uses a near exact version of this library:
+
+- https://www.proxynova.com/tools/cidr-optimizer
+
 ## Installation
 
 ```shell
