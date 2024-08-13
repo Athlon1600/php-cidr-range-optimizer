@@ -7,7 +7,9 @@ class CIDR
     protected string $prefix;
     protected int $length;
 
+    // network address
     protected int $start;
+    // broadcast address
     protected int $end;
 
     /**
@@ -49,7 +51,7 @@ class CIDR
         $prefix = intval($parts[1]);
 
         if ($prefix < 0 || $prefix > 32) {
-            throw new \InvalidArgumentException('Invalid CIDR: ' . $cidrNotation);
+            throw new \InvalidArgumentException('Invalid CIDR prefix: ' . $cidrNotation);
         }
 
         $start = ip2long($address);
@@ -58,14 +60,15 @@ class CIDR
             throw new \InvalidArgumentException('Invalid IP address: ' . $address);
         }
 
-        $prefixLength = pow(2, (32 - $prefix)) - 1;
-        $end = $start + $prefixLength;
+        $mask = -1 << (32 - $prefix);
+        $networkAddress = ip2long($address) & $mask;
+        $broadcastAddress = $networkAddress | ~$mask;
 
         $this->prefix = $address;
         $this->length = $prefix;
 
-        $this->start = $start;
-        $this->end = $end;
+        $this->start = $networkAddress;
+        $this->end = $broadcastAddress;
     }
 
     public function getFirstAddress(): string
