@@ -2,6 +2,18 @@
 
 use ProxyNova\RangeOptimizer\CIDR;
 
+if (!function_exists('cidr_mask_length')) {
+
+    // Formula: # of IP addresses = 2^(32 - CIDR suffix)
+    function cidr_mask_length(int $start, int $end): int
+    {
+        $prefix = 32 - log($end - $start + 1, 2);
+        $prefix = (int)ceil($prefix);
+
+        return min(32, $prefix);
+    }
+}
+
 /**
  * can return multiple ranges
  *
@@ -12,22 +24,26 @@ use ProxyNova\RangeOptimizer\CIDR;
 function range_to_cidr(int $start, int $end): array
 {
     $ranges = [];
-    $maxSize = 32;
 
     // until no ranges left
     while ($start <= $end) {
 
-        $prefix = long2ip($start);
-        $diff = $end - $start;
+        $address = long2ip($start);
 
-        $bits = 32 - log($diff + 1, 2);
+        // from: https://github.com/allaboutjst/airbnb/blob/master/src/main/java/ip_range_to_cidr/IPRangetoCIDR.java#L41
+        // Find the location of the first 1 bit
+        $locOfFirstOne = $start & (-$start);
 
-        // larger length => smaller range
-        $bits = min($maxSize, ceil($bits));
-        $ranges[] = new CIDR($prefix . '/' . $bits);
+        // Calculate the corresponding mask
+        $curMask = 32 - (int)(log($locOfFirstOne) / log(2));
+
+        $maxLen = cidr_mask_length($start, $end);
+        $prefixLength = max($curMask, $maxLen);
+
+        $ranges[] = new CIDR($address . '/' . $prefixLength);
 
         // how many IPs was that?
-        $ipCount = pow(2, 32 - $bits);
+        $ipCount = pow(2, 32 - $prefixLength);
 
         $start += $ipCount;
     }
